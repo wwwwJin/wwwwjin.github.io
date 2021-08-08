@@ -12,8 +12,8 @@
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="wwj">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -136,41 +136,107 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-spring-boot-prepareEnvironment" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/05/hello-world/">Hello World</a>
+      <a class="article-title" href="/2021/08/08/spring-boot-prepareEnvironment/">Spring Boot源码</a>
     </h1>
   
 
         
-        <a href="/2021/08/05/hello-world/" class="archive-article-date">
-  	<time datetime="2021-08-05T08:35:19.586Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-05</time>
+        <a href="/2021/08/08/spring-boot-prepareEnvironment/" class="archive-article-date">
+  	<time datetime="2021-08-08T04:47:45.646Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="prepareEnvironment"><a href="#prepareEnvironment" class="headerlink" title="prepareEnvironment"></a>prepareEnvironment</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> ConfigurableEnvironment <span class="title">prepareEnvironment</span><span class="params">(SpringApplicationRunListeners listeners,</span></span></span><br><span class="line"><span class="params"><span class="function">	DefaultBootstrapContext bootstrapContext, ApplicationArguments applicationArguments)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// Create and configure the environment</span></span><br><span class="line">	ConfigurableEnvironment environment = getOrCreateEnvironment();</span><br><span class="line">	configureEnvironment(environment, applicationArguments.getSourceArgs());</span><br><span class="line">	ConfigurationPropertySources.attach(environment);</span><br><span class="line">	listeners.environmentPrepared(bootstrapContext, environment);</span><br><span class="line">	DefaultPropertiesPropertySource.moveToEnd(environment);</span><br><span class="line">	Assert.state(!environment.containsProperty(<span class="string">&quot;spring.main.environment-prefix&quot;</span>),</span><br><span class="line">			<span class="string">&quot;Environment prefix cannot be set via properties.&quot;</span>);</span><br><span class="line">	bindToSpringApplication(environment);</span><br><span class="line">	<span class="keyword">if</span> (!<span class="keyword">this</span>.isCustomEnvironment) &#123;</span><br><span class="line">		environment = <span class="keyword">new</span> EnvironmentConverter(getClassLoader()).convertEnvironmentIfNecessary(environment,</span><br><span class="line">				deduceEnvironmentClass());</span><br><span class="line">	&#125;</span><br><span class="line">	ConfigurationPropertySources.attach(environment);</span><br><span class="line">	<span class="keyword">return</span> environment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/08/spring-boot-prepareEnvironment/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
 
 
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+  
+    <article id="post-spring-boot-stepListeners" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/08/spring-boot-stepListeners/">Spring Boot源码</a>
+    </h1>
+  
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+        
+        <a href="/2021/08/08/spring-boot-stepListeners/" class="archive-article-date">
+  	<time datetime="2021-08-08T04:36:35.325Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+控制台程序下各个阶段通知的监听者
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="starting"><a href="#starting" class="headerlink" title="starting"></a>starting</h2><ol>
+<li><em><strong>LoggingApplicationListener</strong></em> 日志相关的处理</li>
+<li><em><strong>BackgroundPreinitializer</strong></em>   啥也没做</li>
+<li><em><strong>DelegatingApplicationListener</strong></em> 啥也没做</li>
+</ol>
 
       
 
@@ -184,7 +250,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">a</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
         		</li>
       		
 		</ul>
@@ -194,7 +260,673 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/05/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/08/08/spring-boot-stepListeners/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-boot-deduceMainApplicationClass" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/07/spring-boot-deduceMainApplicationClass/">Spring Boot源码</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/07/spring-boot-deduceMainApplicationClass/" class="archive-article-date">
+  	<time datetime="2021-08-07T02:49:40.866Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+
+<h2 id="deduceMainApplicationClass"><a href="#deduceMainApplicationClass" class="headerlink" title="deduceMainApplicationClass()"></a>deduceMainApplicationClass()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Class&lt;?&gt; deduceMainApplicationClass() &#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		StackTraceElement[] stackTrace = <span class="keyword">new</span> RuntimeException().getStackTrace();</span><br><span class="line">		<span class="keyword">for</span> (StackTraceElement stackTraceElement : stackTrace) &#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="string">&quot;main&quot;</span>.equals(stackTraceElement.getMethodName())) &#123;</span><br><span class="line">				<span class="keyword">return</span> Class.forName(stackTraceElement.getClassName());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">catch</span> (ClassNotFoundException ex) &#123;</span><br><span class="line">		<span class="comment">// Swallow and continue</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从栈中推断出启动类，依据是 main 函数</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/07/spring-boot-deduceMainApplicationClass/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-boot-getBootstrapRegistryInitializersFromSpringFactories" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/07/spring-boot-getBootstrapRegistryInitializersFromSpringFactories/">Spring Boot源码</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/07/spring-boot-getBootstrapRegistryInitializersFromSpringFactories/" class="archive-article-date">
+  	<time datetime="2021-08-07T02:47:27.302Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+
+<h2 id="getBootstrapRegistryInitializersFromSpringFactories"><a href="#getBootstrapRegistryInitializersFromSpringFactories" class="headerlink" title="getBootstrapRegistryInitializersFromSpringFactories"></a>getBootstrapRegistryInitializersFromSpringFactories</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;deprecation&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> List&lt;BootstrapRegistryInitializer&gt; <span class="title">getBootstrapRegistryInitializersFromSpringFactories</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	ArrayList&lt;BootstrapRegistryInitializer&gt; initializers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">	getSpringFactoriesInstances(Bootstrapper.class).stream()</span><br><span class="line">			.map((bootstrapper) -&gt; ((BootstrapRegistryInitializer) bootstrapper::initialize))</span><br><span class="line">			.forEach(initializers::add);</span><br><span class="line">	initializers.addAll(getSpringFactoriesInstances(BootstrapRegistryInitializer.class));</span><br><span class="line">	<span class="keyword">return</span> initializers;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em><strong>Bootstrapper</strong></em> 已经标记 <em><strong>@Deprecated</strong></em><br>查看 <a href="/2021/08/06/spring-boot-getSpringFactoriesInstances/" title="getSpringFactoriesInstances(Class&lt;T&gt; type)">getSpringFactoriesInstances(Class&lt;T&gt; type)</a> 了解更多</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/07/spring-boot-getBootstrapRegistryInitializersFromSpringFactories/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-boot-simpleApplicationEventMulticaster" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/spring-boot-simpleApplicationEventMulticaster/">Spring Boot源码</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/06/spring-boot-simpleApplicationEventMulticaster/" class="archive-article-date">
+  	<time datetime="2021-08-06T09:05:40.563Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+
+<ul>
+<li><br></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">multicastEvent</span><span class="params">(<span class="keyword">final</span> ApplicationEvent event, <span class="meta">@Nullable</span> ResolvableType eventType)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//解析事件类型</span></span><br><span class="line">	ResolvableType type = (eventType != <span class="keyword">null</span> ? eventType : resolveDefaultEventType(event));</span><br><span class="line">    <span class="comment">//获取执行器</span></span><br><span class="line">	Executor executor = getTaskExecutor();</span><br><span class="line">    <span class="comment">//筛选可以处理该事件的listeners</span></span><br><span class="line">	<span class="keyword">for</span> (ApplicationListener&lt;?&gt; listener : getApplicationListeners(event, type)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (executor != <span class="keyword">null</span>) &#123;</span><br><span class="line">			executor.execute(() -&gt; invokeListener(listener, event));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			invokeListener(listener, event);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Collection&lt;ApplicationListener&lt;?&gt;&gt; getApplicationListeners(</span><br><span class="line">			ApplicationEvent event, ResolvableType eventType) &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">//这个事件源source即SpringApplication 对象</span></span><br><span class="line">		Object source = event.getSource();</span><br><span class="line">		Class&lt;?&gt; sourceType = (source != <span class="keyword">null</span> ? source.getClass() : <span class="keyword">null</span>);</span><br><span class="line">		ListenerCacheKey cacheKey = <span class="keyword">new</span> ListenerCacheKey(eventType, sourceType);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Potential new retriever to populate</span></span><br><span class="line">		CachedListenerRetriever newRetriever = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 根据事件源和事件从从缓存中查找对应的listeners</span></span><br><span class="line">		CachedListenerRetriever existingRetriever = <span class="keyword">this</span>.retrieverCache.get(cacheKey);</span><br><span class="line">		<span class="keyword">if</span> (existingRetriever == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="comment">// 缓存 ListenerRetriever如果当前缓存中没有</span></span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.beanClassLoader == <span class="keyword">null</span> ||</span><br><span class="line">					(ClassUtils.isCacheSafe(event.getClass(), <span class="keyword">this</span>.beanClassLoader) &amp;&amp;</span><br><span class="line">							(sourceType == <span class="keyword">null</span> || ClassUtils.isCacheSafe(sourceType, <span class="keyword">this</span>.beanClassLoader)))) &#123;</span><br><span class="line">				newRetriever = <span class="keyword">new</span> CachedListenerRetriever();</span><br><span class="line">				existingRetriever = <span class="keyword">this</span>.retrieverCache.putIfAbsent(cacheKey, newRetriever);</span><br><span class="line">				<span class="keyword">if</span> (existingRetriever != <span class="keyword">null</span>) &#123;</span><br><span class="line">					newRetriever = <span class="keyword">null</span>;  <span class="comment">// no need to populate it in retrieveApplicationListeners</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (existingRetriever != <span class="keyword">null</span>) &#123;</span><br><span class="line">			Collection&lt;ApplicationListener&lt;?&gt;&gt; result = existingRetriever.getApplicationListeners();</span><br><span class="line">			<span class="keyword">if</span> (result != <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> result;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// If result is null, the existing retriever is not fully populated yet by another thread.</span></span><br><span class="line">			<span class="comment">// Proceed like caching wasn&#x27;t possible for this current local attempt.</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> retrieveApplicationListeners(eventType, sourceType, newRetriever);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<ul>
+<li>supportsEvent 未细看  listenerBeans推测是自己添加的监听器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Collection&lt;ApplicationListener&lt;?&gt;&gt; retrieveApplicationListeners(</span><br><span class="line">			ResolvableType eventType, <span class="meta">@Nullable</span> Class&lt;?&gt; sourceType, <span class="meta">@Nullable</span> CachedListenerRetriever retriever) &#123;</span><br><span class="line"></span><br><span class="line">		List&lt;ApplicationListener&lt;?&gt;&gt; allListeners = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		Set&lt;ApplicationListener&lt;?&gt;&gt; filteredListeners = (retriever != <span class="keyword">null</span> ? <span class="keyword">new</span> LinkedHashSet&lt;&gt;() : <span class="keyword">null</span>);</span><br><span class="line">		Set&lt;String&gt; filteredListenerBeans = (retriever != <span class="keyword">null</span> ? <span class="keyword">new</span> LinkedHashSet&lt;&gt;() : <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">		Set&lt;ApplicationListener&lt;?&gt;&gt; listeners;</span><br><span class="line">		Set&lt;String&gt; listenerBeans;</span><br><span class="line">		<span class="keyword">synchronized</span> (<span class="keyword">this</span>.defaultRetriever) &#123;</span><br><span class="line">			listeners = <span class="keyword">new</span> LinkedHashSet&lt;&gt;(<span class="keyword">this</span>.defaultRetriever.applicationListeners);</span><br><span class="line">			listenerBeans = <span class="keyword">new</span> LinkedHashSet&lt;&gt;(<span class="keyword">this</span>.defaultRetriever.applicationListenerBeans);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Add programmatically registered listeners, including ones coming</span></span><br><span class="line">		<span class="comment">// from ApplicationListenerDetector (singleton beans and inner beans).</span></span><br><span class="line">		<span class="keyword">for</span> (ApplicationListener&lt;?&gt; listener : listeners) &#123;</span><br><span class="line">			<span class="keyword">if</span> (supportsEvent(listener, eventType, sourceType)) &#123;</span><br><span class="line">				<span class="keyword">if</span> (retriever != <span class="keyword">null</span>) &#123;</span><br><span class="line">					filteredListeners.add(listener);</span><br><span class="line">				&#125;</span><br><span class="line">				allListeners.add(listener);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Add listeners by bean name, potentially overlapping with programmatically</span></span><br><span class="line">		<span class="comment">// registered listeners above - but here potentially with additional metadata.</span></span><br><span class="line">		<span class="keyword">if</span> (!listenerBeans.isEmpty()) &#123;</span><br><span class="line">			ConfigurableBeanFactory beanFactory = getBeanFactory();</span><br><span class="line">			<span class="keyword">for</span> (String listenerBeanName : listenerBeans) &#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					<span class="keyword">if</span> (supportsEvent(beanFactory, listenerBeanName, eventType)) &#123;</span><br><span class="line">						ApplicationListener&lt;?&gt; listener =</span><br><span class="line">								beanFactory.getBean(listenerBeanName, ApplicationListener.class);</span><br><span class="line">						<span class="keyword">if</span> (!allListeners.contains(listener) &amp;&amp; supportsEvent(listener, eventType, sourceType)) &#123;</span><br><span class="line">							<span class="keyword">if</span> (retriever != <span class="keyword">null</span>) &#123;</span><br><span class="line">								<span class="keyword">if</span> (beanFactory.isSingleton(listenerBeanName)) &#123;</span><br><span class="line">									filteredListeners.add(listener);</span><br><span class="line">								&#125;</span><br><span class="line">								<span class="keyword">else</span> &#123;</span><br><span class="line">									filteredListenerBeans.add(listenerBeanName);</span><br><span class="line">								&#125;</span><br><span class="line">							&#125;</span><br><span class="line">							allListeners.add(listener);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">else</span> &#123;</span><br><span class="line">						<span class="comment">// Remove non-matching listeners that originally came from</span></span><br><span class="line">						<span class="comment">// ApplicationListenerDetector, possibly ruled out by additional</span></span><br><span class="line">						<span class="comment">// BeanDefinition metadata (e.g. factory method generics) above.</span></span><br><span class="line">						Object listener = beanFactory.getSingleton(listenerBeanName);</span><br><span class="line">						<span class="keyword">if</span> (retriever != <span class="keyword">null</span>) &#123;</span><br><span class="line">							filteredListeners.remove(listener);</span><br><span class="line">						&#125;</span><br><span class="line">						allListeners.remove(listener);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">catch</span> (NoSuchBeanDefinitionException ex) &#123;</span><br><span class="line">					<span class="comment">// Singleton listener instance (without backing bean definition) disappeared -</span></span><br><span class="line">					<span class="comment">// probably in the middle of the destruction phase</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		AnnotationAwareOrderComparator.sort(allListeners);</span><br><span class="line">		<span class="keyword">if</span> (retriever != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (filteredListenerBeans.isEmpty()) &#123;</span><br><span class="line">				retriever.applicationListeners = <span class="keyword">new</span> LinkedHashSet&lt;&gt;(allListeners);</span><br><span class="line">				retriever.applicationListenerBeans = filteredListenerBeans;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				retriever.applicationListeners = filteredListeners;</span><br><span class="line">				retriever.applicationListenerBeans = filteredListenerBeans;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> allListeners;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/06/spring-boot-simpleApplicationEventMulticaster/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-boot-getRunListeners" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/spring-boot-getRunListeners/">Spring Boot源码</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/06/spring-boot-getRunListeners/" class="archive-article-date">
+  	<time datetime="2021-08-06T08:17:45.466Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+
+<h2 id="getRunListeners-String-args"><a href="#getRunListeners-String-args" class="headerlink" title="getRunListeners(String[] args)"></a>getRunListeners(String[] args)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> SpringApplicationRunListeners <span class="title">getRunListeners</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	Class&lt;?&gt;[] types = <span class="keyword">new</span> Class&lt;?&gt;[] &#123; SpringApplication.class, String[].class &#125;;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> SpringApplicationRunListeners(logger,</span><br><span class="line">			getSpringFactoriesInstances(SpringApplicationRunListener.class, types, <span class="keyword">this</span>, args),</span><br><span class="line">			<span class="keyword">this</span>.applicationStartup);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<p>SpringApplicationRunListeners 在应用的不同阶段通知各个监听者</p>
+<ol>
+<li><strong>starting</strong> Called immediately when the run method has first started. Can be used for very early initialization.</li>
+<li><strong>environmentPrepared</strong> Called once the environment has been prepared, but before the ApplicationContext has been created.</li>
+<li><strong>contextPrepared</strong> Called once the ApplicationContext has been created and prepared, but before sources have been loaded.</li>
+<li><strong>contextLoaded</strong> Called once the application context has been loaded but before it has been refreshed.</li>
+<li><strong>started</strong> The context has been refreshed and the application has started but CommandLineRunners and ApplicationRunners have not been called.</li>
+<li><strong>running</strong> Called immediately before the run method finishes, when the application context has been refreshed and all CommandLineRunners and ApplicationRunners have been called.</li>
+<li><strong>failed</strong> Called when a failure occurs when running the application.</li>
+</ol>
+<h2 id="EventPublishingRunListener"><a href="#EventPublishingRunListener" class="headerlink" title="EventPublishingRunListener"></a>EventPublishingRunListener</h2><p><strong>EventPublishingRunListener</strong> 是 <strong>SpringApplicationRunListener</strong>接口的实现类，进一步分发事件，其中有一个简单的事件分发器 <strong>SimpleApplicationEventMulticaster</strong>协助其分发事件到筛选出的可以处理对应事件类型的监听器</p>
+<h2 id="SimpleApplicationEventMulticaster"><a href="#SimpleApplicationEventMulticaster" class="headerlink" title="SimpleApplicationEventMulticaster"></a>SimpleApplicationEventMulticaster</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">multicastEvent</span><span class="params">(<span class="keyword">final</span> ApplicationEvent event, <span class="meta">@Nullable</span> ResolvableType eventType)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//获取可处理的事件类型</span></span><br><span class="line">	ResolvableType type = (eventType != <span class="keyword">null</span> ? eventType : resolveDefaultEventType(event));</span><br><span class="line">	Executor executor = getTaskExecutor();</span><br><span class="line">	<span class="comment">//筛选出可执行对应事件的监听器处理事件</span></span><br><span class="line">	<span class="keyword">for</span> (ApplicationListener&lt;?&gt; listener : getApplicationListeners(event, type)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (executor != <span class="keyword">null</span>) &#123;</span><br><span class="line">			executor.execute(() -&gt; invokeListener(listener, event));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			invokeListener(listener, event);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>行7 待完善 getApplicationListeners <strong>AbstractApplicationEventMulticaster</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/06/spring-boot-getRunListeners/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-boot-eventPublishingRunListener" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/spring-boot-eventPublishingRunListener/">Spring Boot源码</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/06/spring-boot-eventPublishingRunListener/" class="archive-article-date">
+  	<time datetime="2021-08-06T06:27:45.077Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+
+<ul>
+<li>EventPublishingRunListener通过事件分发器（<a href="/2021/08/06/spring-boot-simpleApplicationEventMulticaster/" title="SimpleApplicationEventMulticaster">SimpleApplicationEventMulticaster</a>）将当前事件分发给可以处理此类事件的listeners</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EventPublishingRunListener</span> <span class="keyword">implements</span> <span class="title">SpringApplicationRunListener</span>, <span class="title">Ordered</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> SpringApplication application;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> String[] args;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> SimpleApplicationEventMulticaster initialMulticaster;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">EventPublishingRunListener</span><span class="params">(SpringApplication application, String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.application = application;</span><br><span class="line">		<span class="keyword">this</span>.args = args;</span><br><span class="line">		<span class="keyword">this</span>.initialMulticaster = <span class="keyword">new</span> SimpleApplicationEventMulticaster();</span><br><span class="line">		<span class="keyword">for</span> (ApplicationListener&lt;?&gt; listener : application.getListeners()) &#123;</span><br><span class="line">			<span class="keyword">this</span>.initialMulticaster.addApplicationListener(listener);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<br>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/06/spring-boot-eventPublishingRunListener/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-boot-getSpringFactoriesInstances" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/spring-boot-getSpringFactoriesInstances/">Spring Boot源码</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/06/spring-boot-getSpringFactoriesInstances/" class="archive-article-date">
+  	<time datetime="2021-08-06T04:24:09.007Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+
+
+<h2 id="getSpringFactoriesInstances"><a href="#getSpringFactoriesInstances" class="headerlink" title="getSpringFactoriesInstances"></a>getSpringFactoriesInstances</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> &lt;T&gt; <span class="function">Collection&lt;T&gt; <span class="title">getSpringFactoriesInstances</span><span class="params">(Class&lt;T&gt; type)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> getSpringFactoriesInstances(type, <span class="keyword">new</span> Class&lt;?&gt;[] &#123;&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> &lt;T&gt; <span class="function">Collection&lt;T&gt; <span class="title">getSpringFactoriesInstances</span><span class="params">(Class&lt;T&gt; type, Class&lt;?&gt;[] parameterTypes, Object... args)</span> </span>&#123;</span><br><span class="line">	ClassLoader classLoader = getClassLoader();</span><br><span class="line">	<span class="comment">// Use names and ensure unique to protect against duplicates</span></span><br><span class="line">	Set&lt;String&gt; names = <span class="keyword">new</span> LinkedHashSet&lt;&gt;(SpringFactoriesLoader.loadFactoryNames(type, classLoader));</span><br><span class="line">	<span class="comment">// 对筛选出来的类的实例</span></span><br><span class="line">	List&lt;T&gt; instances = createSpringFactoriesInstances(type, parameterTypes, classLoader, args, names);</span><br><span class="line">	<span class="comment">// 排序</span></span><br><span class="line">	AnnotationAwareOrderComparator.sort(instances);</span><br><span class="line">	<span class="keyword">return</span> instances;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>行8 <a href="#jump_loadFactoryNames">loadFactoryNames</a><br>行10 根据注解 <em><strong>@Order</strong></em> 排序</p>
+<br>
+
+<h2 id="loadFactoryNames"><a href="#loadFactoryNames" class="headerlink" title="loadFactoryNames"></a><span id="jump_loadFactoryNames">loadFactoryNames</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">loadFactoryNames</span><span class="params">(Class&lt;?&gt; factoryType, <span class="meta">@Nullable</span> ClassLoader classLoader)</span> </span>&#123;</span><br><span class="line">	ClassLoader classLoaderToUse = classLoader;</span><br><span class="line">	<span class="keyword">if</span> (classLoaderToUse == <span class="keyword">null</span>) &#123;</span><br><span class="line">		classLoaderToUse = SpringFactoriesLoader.class.getClassLoader();</span><br><span class="line">	&#125;</span><br><span class="line">	String factoryTypeName = factoryType.getName();</span><br><span class="line">	<span class="keyword">return</span> loadSpringFactories(classLoaderToUse).getOrDefault(factoryTypeName, Collections.emptyList());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从map中获取对应的类名集合</p>
+<br>
+
+<h2 id="loadSpringFactories"><a href="#loadSpringFactories" class="headerlink" title="loadSpringFactories"></a>loadSpringFactories</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, List&lt;String&gt;&gt; loadSpringFactories(ClassLoader classLoader) &#123;</span><br><span class="line">	<span class="comment">//先从缓存中查找</span></span><br><span class="line">	Map&lt;String, List&lt;String&gt;&gt; result = cache.get(classLoader);</span><br><span class="line">	<span class="keyword">if</span> (result != <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		Enumeration&lt;URL&gt; urls = classLoader.getResources(FACTORIES_RESOURCE_LOCATION);</span><br><span class="line">		<span class="keyword">while</span> (urls.hasMoreElements()) &#123;</span><br><span class="line">			URL url = urls.nextElement();</span><br><span class="line">			UrlResource resource = <span class="keyword">new</span> UrlResource(url);</span><br><span class="line">			Properties properties = PropertiesLoaderUtils.loadProperties(resource);</span><br><span class="line">			<span class="keyword">for</span> (Map.Entry&lt;?, ?&gt; entry : properties.entrySet()) &#123;</span><br><span class="line">				String factoryTypeName = ((String) entry.getKey()).trim();</span><br><span class="line">				String[] factoryImplementationNames =</span><br><span class="line">						StringUtils.commaDelimitedListToStringArray((String) entry.getValue());</span><br><span class="line">				<span class="keyword">for</span> (String factoryImplementationName : factoryImplementationNames) &#123;</span><br><span class="line">					result.computeIfAbsent(factoryTypeName, key -&gt; <span class="keyword">new</span> ArrayList&lt;&gt;())</span><br><span class="line">							.add(factoryImplementationName.trim());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Replace all lists with unmodifiable lists containing unique elements</span></span><br><span class="line">		result.replaceAll((factoryType, implementations) -&gt; implementations.stream().distinct()</span><br><span class="line">				.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList)));</span><br><span class="line">		cache.put(classLoader, result);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Unable to load factories from location [&quot;</span> +</span><br><span class="line">				FACTORIES_RESOURCE_LOCATION + <span class="string">&quot;]&quot;</span>, ex);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用指定的类加载器全面加载 “META-INF/spring.factories” 文件，并对其进行去重形成 <em><strong>Map&lt;String, List<String>&gt;</strong></em> 对象，并且在缓存中缓存(key 为类加载器，value 为上述map)。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/06/spring-boot-getSpringFactoriesInstances/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring-boot-deduceFromClasspath" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/spring-boot-deduceFromClasspath/">Spring Boot源码</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/06/spring-boot-deduceFromClasspath/" class="archive-article-date">
+  	<time datetime="2021-08-06T04:21:44.477Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+
+<h2 id="deduceFromClasspath"><a href="#deduceFromClasspath" class="headerlink" title="deduceFromClasspath()"></a>deduceFromClasspath()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> WebApplicationType <span class="title">deduceFromClasspath</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (ClassUtils.isPresent(WEBFLUX_INDICATOR_CLASS, <span class="keyword">null</span>) &amp;&amp; !ClassUtils.isPresent(WEBMVC_INDICATOR_CLASS, <span class="keyword">null</span>)</span><br><span class="line">				&amp;&amp; !ClassUtils.isPresent(JERSEY_INDICATOR_CLASS, <span class="keyword">null</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> WebApplicationType.REACTIVE;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (String className : SERVLET_INDICATOR_CLASSES) &#123;</span><br><span class="line">		<span class="keyword">if</span> (!ClassUtils.isPresent(className, <span class="keyword">null</span>)) &#123;</span><br><span class="line">			<span class="keyword">return</span> WebApplicationType.NONE;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> WebApplicationType.SERVLET;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据相关类文件的存在与否判断程序类型</p>
+<p>NONE就是什么都没有，按照正常的代码走即可不需要额外启动web容器如tomcat等；<br>SERVLET则代表这是一个传统的servlet的web程序，对应SpringMVC，表示需要启动对应的web容器支持如tomcat等；<br>REACTIVE则是一种比较新的非阻塞的web框架，对应spring-webflux，需要启动支持reactive的web容器</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/06/spring-boot-deduceFromClasspath/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-srping-boot-app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/srping-boot-app/">Spring Boot源码概览</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/06/srping-boot-app/" class="archive-article-date">
+  	<time datetime="2021-08-06T04:19:17.907Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>Spring Boot 版本 2.5.3</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@SpringBootApplication</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         SpringApplication.run(App.class,args);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ConfigurableApplicationContext <span class="title">run</span><span class="params">(Class&lt;?&gt;[] primarySources, String[] args)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> SpringApplication(primarySources).run(args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="SpringApplication-构造"><a href="#SpringApplication-构造" class="headerlink" title="SpringApplication() 构造"></a>SpringApplication() 构造</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&#123; &quot;unchecked&quot;, &quot;rawtypes&quot; &#125;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">SpringApplication</span><span class="params">(ResourceLoader resourceLoader, Class&lt;?&gt;... primarySources)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.resourceLoader = resourceLoader;</span><br><span class="line">	<span class="comment">//判断主要资源是否为空</span></span><br><span class="line">	Assert.notNull(primarySources, <span class="string">&quot;PrimarySources must not be null&quot;</span>);</span><br><span class="line">	<span class="keyword">this</span>.primarySources = <span class="keyword">new</span> LinkedHashSet&lt;&gt;(Arrays.asList(primarySources));</span><br><span class="line">	<span class="comment">//判断应用类型</span></span><br><span class="line">	<span class="keyword">this</span>.webApplicationType = WebApplicationType.deduceFromClasspath();</span><br><span class="line">	<span class="comment">//创建 BootstrapRegistryInitializer 接口实例</span></span><br><span class="line">	<span class="keyword">this</span>.bootstrapRegistryInitializers = getBootstrapRegistryInitializersFromSpringFactories();</span><br><span class="line">	<span class="comment">//创建 ApplicationContextInitializer 接口实例</span></span><br><span class="line">	setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextInitializer.class));</span><br><span class="line">	<span class="comment">//创建 ApplicationListener 接口实例</span></span><br><span class="line">	setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));</span><br><span class="line">	<span class="comment">//推断程序入口类</span></span><br><span class="line">	<span class="keyword">this</span>.mainApplicationClass = deduceMainApplicationClass();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>行8 <a href="/2021/08/06/spring-boot-deduceFromClasspath/" title="WebApplicationType.deduceFromClasspath()">WebApplicationType.deduceFromClasspath()</a><br>行10 <a href="/2021/08/07/spring-boot-getBootstrapRegistryInitializersFromSpringFactories/" title="getBootstrapRegistryInitializersFromSpringFactories()">getBootstrapRegistryInitializersFromSpringFactories()</a><br>行12,14 <a href="/2021/08/06/spring-boot-getSpringFactoriesInstances/" title="getSpringFactoriesInstances(Class&lt;T&gt; type)">getSpringFactoriesInstances(Class&lt;T&gt; type)</a><br>行16 <a href="/2021/08/07/spring-boot-deduceMainApplicationClass/" title="deduceMainApplicationClass()">deduceMainApplicationClass()</a></p>
+<br>
+
+
+
+<h2 id="run-String…-args"><a href="#run-String…-args" class="headerlink" title="run(String… args)"></a>run(String… args)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ConfigurableApplicationContext <span class="title">run</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">	StopWatch stopWatch = <span class="keyword">new</span> StopWatch();</span><br><span class="line">	stopWatch.start();</span><br><span class="line">	<span class="comment">//创建启动上下文，并执行了启动初始化</span></span><br><span class="line">	DefaultBootstrapContext bootstrapContext = createBootstrapContext();</span><br><span class="line">	<span class="comment">//应用上下文</span></span><br><span class="line">	ConfigurableApplicationContext context = <span class="keyword">null</span>;</span><br><span class="line">	<span class="comment">//设置系统属性 java.awt.headless </span></span><br><span class="line">	configureHeadlessProperty();</span><br><span class="line">	<span class="comment">//获取监听集合 EventPublishingRunListener</span></span><br><span class="line">	SpringApplicationRunListeners listeners = getRunListeners(args);</span><br><span class="line">	<span class="comment">//通知开始</span></span><br><span class="line">	listeners.starting(bootstrapContext, <span class="keyword">this</span>.mainApplicationClass);</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">//应用启动参数</span></span><br><span class="line">		ApplicationArguments applicationArguments = <span class="keyword">new</span> DefaultApplicationArguments(args);</span><br><span class="line">		ConfigurableEnvironment environment = prepareEnvironment(listeners, bootstrapContext, applicationArguments);</span><br><span class="line">		configureIgnoreBeanInfo(environment);</span><br><span class="line">		Banner printedBanner = printBanner(environment);</span><br><span class="line">		context = createApplicationContext();</span><br><span class="line">		context.setApplicationStartup(<span class="keyword">this</span>.applicationStartup);</span><br><span class="line">		prepareContext(bootstrapContext, context, environment, listeners, applicationArguments, printedBanner);</span><br><span class="line">		refreshContext(context);</span><br><span class="line">		afterRefresh(context, applicationArguments);</span><br><span class="line">		stopWatch.stop();</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.logStartupInfo) &#123;</span><br><span class="line">			<span class="keyword">new</span> StartupInfoLogger(<span class="keyword">this</span>.mainApplicationClass).logStarted(getApplicationLog(), stopWatch);</span><br><span class="line">		&#125;</span><br><span class="line">		listeners.started(context);</span><br><span class="line">		callRunners(context, applicationArguments);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">		handleRunFailure(context, ex, listeners);</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(ex);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		listeners.running(context);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">		handleRunFailure(context, ex, <span class="keyword">null</span>);</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(ex);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> context;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>行10 <a href="/2021/08/06/spring-boot-getRunListeners/" title="getRunListeners(args)">getRunListeners(args)</a><br>行16 <a href="/2021/08/08/spring-boot-prepareEnvironment/" title="prepareEnvironment(...)">prepareEnvironment(...)</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/06/srping-boot-app/">展开全文 >></a>
         </p>
       
 
@@ -225,6 +957,10 @@
 
   
   
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
+  
 
 
           </div>
@@ -234,7 +970,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 John Doe
+    		&copy; 2021 wwj
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -309,7 +1045,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">a</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
               </li>
             
             <div class="clearfix"></div>
